@@ -1,24 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { OUserInfoService } from 'ontimize-web-ngx';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  host: {
+    '[class.home-component]': 'true'
+  }
 })
 export class HomeComponent implements OnInit {
 
+  public username: string;
+
   constructor(
-    private router: Router,
-    private actRoute: ActivatedRoute
-  ) {
-  }
+    private userService: OUserInfoService
+  ) { }
 
   ngOnInit() {
+    let userInfo = this.userService.getUserInfo();
+    if (userInfo) {
+      this.username = userInfo.username;
+    }
   }
 
-  navigate() {
-    this.router.navigate(['../', 'login'], { relativeTo: this.actRoute });
+  calculateUserBalance(data: any[]): number {
+    return data.map(a => a.BALANCE).reduce((a, b) => a + b, 0);
   }
 
 }

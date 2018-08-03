@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
-import { OntimizeWebModule } from 'ontimize-web-ngx';
 import { CommonModule } from '@angular/common';
+import { OntimizeWebModule } from 'ontimize-web-ngx';
+import { OChartModule } from 'ontimize-web-ngx-charts';
 
 @NgModule({
   imports: [
+    OChartModule,
     OntimizeWebModule
   ],
-  declarations: [
-  ],
+  declarations: [],
   exports: [
-    CommonModule
+    CommonModule,
+    OChartModule
   ]
 })
 export class SharedModule { }

@@ -1,13 +1,13 @@
 {
-  "name": "ontimize-web-ngx-jee-seed",
-  "version": "3.0.1",
+  "name": "ontimize-web-ngx-quickstart-mobile",
+  "version": "3.0.2",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4299",
+    "start": "ng serve --port 4204",
     "production": "ng build --aot=false --target -prod",
-    "production-aot": "ontimize-web-ngx production-aot --href /ontimize-web-ngx-jee-seed/"
+    "production-aot": "ontimize-web-ngx production-aot --href /ontimize-web-ngx-quickstart-mobile/"
   },
   "private": true,
   "dependencies": {
@@ -29,8 +29,9 @@
     "@ngx-translate/core": "9.1.1",
     "@ngx-translate/http-loader": "2.0.1",
     "core-js": "2.5.3",
-    "ontimize-web-ngx": "3.0.0-rc.1",
-    "ontimize-web-ngx-theming": "1.1.1",
+    "ontimize-web-ngx": "3.0.1",
+    "ontimize-web-ngx-charts": "^3.0.0-rc.1",
+    "ontimize-web-ngx-theming": "1.1.2",
     "reflect-metadata": "0.1.12",
     "rxjs": "5.5.6",
     "zone.js": "0.8.20"

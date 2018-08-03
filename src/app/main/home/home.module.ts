@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { OntimizeWebModule } from 'ontimize-web-ngx';
-import { SharedModule } from '../../shared/shared.module';
+
 import { HomeComponent } from './home.component';
+import { SharedModule } from '../../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { AccountDetailComponent } from './account-detail/account-detail.component';
 
 @NgModule({
   imports: [
@@ -11,7 +13,8 @@ import { HomeRoutingModule } from './home-routing.module';
     HomeRoutingModule
   ],
   declarations: [
-    HomeComponent
+    HomeComponent,
+    AccountDetailComponent
   ]
 })
 export class HomeModule { }

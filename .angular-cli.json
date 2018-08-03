@@ -20,6 +20,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/ontimize-web-ngx-charts/styles.scss",
         "../node_modules/ontimize-web-ngx/ontimize.scss",
         "assets/css/app.scss",
         "styles.scss"

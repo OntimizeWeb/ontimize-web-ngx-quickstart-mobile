@@ -1,3 +1,13 @@
-.bg {
-  background-color: darkred;
+.user-info {
+  font-size: 1.5em;
+  padding-left: 1em;
+  max-height: 84px;
+
+  .balance {
+    font-weight: bold;
+  }
+}
+
+.balance-list {
+  height: calc(100% - 84px);
 }

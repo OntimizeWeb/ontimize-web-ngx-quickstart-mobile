@@ -1,0 +1,21 @@
+.o-form .o-form-content-wrapper {
+  padding: 0;
+}
+
+.account-info {
+  font-size: .8em;
+  max-height: 70px;
+
+  .account-name {
+    font-size: 1.4em;
+  }
+
+  .total-balance {
+    font-size: 2em;
+    font-weight: bold;
+  }
+}
+
+o-chart.o-chart div:first-child {
+  padding: 0;
+}
