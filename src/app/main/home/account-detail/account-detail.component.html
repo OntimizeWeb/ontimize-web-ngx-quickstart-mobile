@@ -13,7 +13,8 @@
     x-axis="DATE_" y-axis="MOVEMENT" x-data-type="time" chart-height="200px" class="o-chart"></o-chart>
 
   <o-list #movementsList attr="movementsList" service="movements" entity="movement" keys="MOVEMENTID" parent-keys="ACCOUNTID"
-    columns="ACCOUNTID;MOVEMENTID;DATE_;CONCEPT;MOVEMENT;MOVEMENTTYPEID" query-on-init="no" pageable="no" controls="no" detail-mode="none">
+    columns="ACCOUNTID;MOVEMENTID;DATE_;CONCEPT;MOVEMENT;MOVEMENTTYPEID" query-on-init="no" pageable="no" controls="no" detail-mode="none"
+    class="movements-list">
     <mat-list-item *ngFor="let rowData of movementsList.dataArray" [o-list-item]="rowData">
       <mat-icon *ngIf="rowData.MOVEMENTTYPEID===1 || rowData.MOVEMENTTYPEID===5" mat-list-icon>account_balance</mat-icon>
       <mat-icon *ngIf="rowData.MOVEMENTTYPEID===2" mat-list-icon>account_balance_wallet</mat-icon>

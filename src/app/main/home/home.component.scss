@@ -9,5 +9,28 @@
 }
 
 .balance-list {
-  height: calc(100% - 84px);
+  height: calc(100% - 48px);
 }
+
+// Mobile styles
+// .balance-list {
+//   .mat-list {
+//     padding-top: 4px;
+
+//     .o-list-item.mat-list-item {
+//       margin: 3px 0;
+//     }
+
+//     .mat-list-item.mat-3-line {
+//       height: 60px;
+//     }
+
+//     .mat-list-item .mat-list-item-content {
+//       padding: 0 8px;
+//     }
+
+//     .mat-list-item .mat-list-item-content .mat-list-text:not(:nth-child(2)) {
+//       padding-left: 8px;
+//     }
+//   }
+// }

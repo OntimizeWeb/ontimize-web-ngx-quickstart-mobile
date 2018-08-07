@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { OUserInfoService } from 'ontimize-web-ngx';
 
 @Component({
@@ -7,7 +7,8 @@ import { OUserInfoService } from 'ontimize-web-ngx';
   styleUrls: ['./home.component.scss'],
   host: {
     '[class.home-component]': 'true'
-  }
+  },
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
 
