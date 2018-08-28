@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { OChartComponent } from 'ontimize-web-ngx-charts';
-import { FilterExpressionUtils } from 'ontimize-web-ngx';
+import { FilterExpressionUtils, OFormComponent, OListComponent } from 'ontimize-web-ngx';
 
 @Component({
   selector: 'account-detail',
@@ -13,16 +13,32 @@ import { FilterExpressionUtils } from 'ontimize-web-ngx';
 })
 export class AccountDetailComponent {
 
+  @ViewChild('form') form: OFormComponent;
   @ViewChild('chart') chart: OChartComponent;
+  @ViewChild('list') list: OListComponent;
   today = new Date();
+  date = new Date(2000, 5);
+  currentMonth: number = + new Date(2000, 5).getMonth();
 
-  onFormDataLoaded(data): void {
-    let beKey = FilterExpressionUtils.buildExpressionEquals('ACCOUNTID', 1);
-    let be1 = FilterExpressionUtils.buildExpressionMoreEqual('DATE_', new Date(2000, 6, 1).getTime());
-    let be2 = FilterExpressionUtils.buildExpressionLessEqual('DATE_', new Date(2000, 7, 0).getTime());
-    let beDates = FilterExpressionUtils.buildComplexExpression(be1, be2, FilterExpressionUtils.OP_AND);
-    let be = FilterExpressionUtils.buildBasicExpression(FilterExpressionUtils.buildComplexExpression(beKey, beDates, FilterExpressionUtils.OP_AND));
-    this.chart.queryData(be);
+  queryChart(): void {
+    let fe1 = FilterExpressionUtils.buildExpressionMoreEqual('DATE_', new Date(this.date.getFullYear(), this.date.getMonth(), 1).getTime());
+    let fe2 = FilterExpressionUtils.buildExpressionLess('DATE_', new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getTime());
+    let beDates = FilterExpressionUtils.buildBasicExpression(FilterExpressionUtils.buildComplexExpression(fe1, fe2, FilterExpressionUtils.OP_AND));
+
+    this.chart.queryData(Object.assign(beDates, this.form.getKeysValues()), { sqltypes: { DATE_: 93 } });
+    this.list.queryData(beDates, { sqltypes: { DATE_: 93 } });
+  }
+
+  onClickPrevMonth(): void {
+    this.date.setMonth(this.currentMonth - 1);
+    this.currentMonth = this.date.getMonth();
+    this.queryChart();
+  }
+
+  onClickNextMonth(): void {
+    this.date.setMonth(this.currentMonth + 1);
+    this.currentMonth = this.date.getMonth();
+    this.queryChart();
   }
 
 }

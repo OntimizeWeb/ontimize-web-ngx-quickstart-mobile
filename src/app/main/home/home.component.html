@@ -1,7 +1,8 @@
 <div fxLayout="column" class="user-info">
   <span>HELLO {{ username | uppercase }},</span>
   <span>YOU HAVE</span>
-  <span class="balance">{{ calculateUserBalance(accountsList.dataArray) | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2} }} €</span>
+  <span class="balance">{{ calculateUserBalance(accountsList.dataArray) | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
+    }} €</span>
 </div>
 
 <o-list #accountsList service="customers" entity="customerAccount" keys="ACCOUNTID" columns="ACCOUNTTYP;ACCOUNT;BALANCE"
