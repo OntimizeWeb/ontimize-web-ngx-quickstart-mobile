@@ -1,6 +1,6 @@
 <div fxLayout="column" class="user-info">
-  <span>HELLO {{ username | uppercase }},</span>
-  <span>YOU HAVE</span>
+  <span>Hello {{ username | uppercase }},</span>
+  <span>You have</span>
   <span class="balance">{{ calculateUserBalance(accountsList.dataArray) | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
     }} €</span>
 </div>
@@ -9,8 +9,8 @@
   query-method="customerQuery" quick-filter="no" controls="no" class="balance-list">
   <mat-list-item *ngFor="let row of accountsList.dataArray" role="listitem" o-list-item fxLayout="column">
     <mat-icon mat-list-icon>euro_symbol</mat-icon>
-    <span mat-line>{{ row.ACCOUNTTYP }}</span>
+    <span mat-line class="text-primary">{{ row.ACCOUNTTYP }}</span>
     <span mat-line>{{ row.ACCOUNT }}</span>
-    <span mat-line>{{ row.BALANCE }} €</span>
+    <span mat-line class="text-highlight">{{ row.BALANCE }} €</span>
   </mat-list-item>
 </o-list>

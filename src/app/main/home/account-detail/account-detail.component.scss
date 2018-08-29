@@ -4,10 +4,11 @@
 
 .account-info {
   font-size: .8em;
-  max-height: 70px;
+  height: 66px;
 
   .account-name {
     font-size: 1.4em;
+    font-weight: bold;
   }
 
   .total-balance {
@@ -17,28 +18,35 @@
 }
 
 o-chart.o-chart div:first-child {
-  padding: 0;
+  padding: 0 8px;
 }
 
-// Mobile styles
-// .movements-list {
-//   .mat-list {
-//     padding-top: 4px;
+.month-selector {
+  height: 40px;
+  border-radius: 8px;
+  background: #cccccc;
+}
 
-//     .o-list-item.o-list-item.mat-list-item {
-//       margin: 3px 0;
-//     }
+.movements-list {
+  height: calc(100% - 66px - 200px - 40px);
 
-//     .mat-list-item.mat-2-line {
-//       height: 50px;
-//     }
+  .mat-list {
+    mat-list-item.mat-list-item.mat-2-line {
+      height: 50px;
+    }
 
-//     .mat-list-item .mat-list-item-content {
-//       padding: 0 8px;
-//     }
+    mat-list-item.o-list-item.mat-list-item {
+      margin: 0;
 
-//     .mat-list-item .mat-list-item-content .mat-list-text:not(:nth-child(2)) {
-//       padding-left: 8px;
-//     }
-//   }
-// }
+      .text-primary {
+        font-size: 1.4em;
+        font-weight: bold;
+      }
+
+      .text-highlight {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
+  }
+}

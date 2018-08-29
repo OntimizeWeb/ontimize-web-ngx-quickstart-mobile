@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { OChartComponent } from 'ontimize-web-ngx-charts';
 import { FilterExpressionUtils, OFormComponent, OListComponent } from 'ontimize-web-ngx';
 
@@ -11,7 +11,7 @@ import { FilterExpressionUtils, OFormComponent, OListComponent } from 'ontimize-
   },
   encapsulation: ViewEncapsulation.None
 })
-export class AccountDetailComponent {
+export class AccountDetailComponent implements AfterViewInit {
 
   @ViewChild('form') form: OFormComponent;
   @ViewChild('chart') chart: OChartComponent;
@@ -20,13 +20,19 @@ export class AccountDetailComponent {
   date = new Date(2000, 5);
   currentMonth: number = + new Date(2000, 5).getMonth();
 
+  ngAfterViewInit(): void {
+    this.chart.options.chart['showLegend'] = false;
+  }
+
   queryChart(): void {
+    let feKey = FilterExpressionUtils.buildExpressionFromObject(this.form.getKeysValues());
     let fe1 = FilterExpressionUtils.buildExpressionMoreEqual('DATE_', new Date(this.date.getFullYear(), this.date.getMonth(), 1).getTime());
     let fe2 = FilterExpressionUtils.buildExpressionLess('DATE_', new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getTime());
-    let beDates = FilterExpressionUtils.buildBasicExpression(FilterExpressionUtils.buildComplexExpression(fe1, fe2, FilterExpressionUtils.OP_AND));
+    let beDates = FilterExpressionUtils.buildComplexExpression(fe1, fe2, FilterExpressionUtils.OP_AND);
+    let be = FilterExpressionUtils.buildBasicExpression(FilterExpressionUtils.buildComplexExpression(feKey, beDates, FilterExpressionUtils.OP_AND));
 
-    this.chart.queryData(Object.assign(beDates, this.form.getKeysValues()), { sqltypes: { DATE_: 93 } });
-    this.list.queryData(beDates, { sqltypes: { DATE_: 93 } });
+    this.chart.queryData(be, { sqltypes: { DATE_: 93 } });
+    this.list.queryData(be, { sqltypes: { DATE_: 93 } });
   }
 
   onClickPrevMonth(): void {

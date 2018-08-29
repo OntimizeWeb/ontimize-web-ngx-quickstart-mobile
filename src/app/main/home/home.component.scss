@@ -1,18 +1,38 @@
 .user-info {
   font-size: 1.5em;
   padding-left: 1em;
-  max-height: 84px;
+  height: 60px;
 
   .balance {
+    font-size: 1em;
     font-weight: bold;
   }
 }
 
 .balance-list {
-  height: calc(100% - 48px);
+  height: calc(100% - 60px);
+
+  .mat-list {
+    mat-list-item.mat-list-item.mat-3-line {
+      height: 70px;
+    }
+
+    mat-list-item.o-list-item.mat-list-item {
+      margin: 0;
+
+      .text-primary {
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+
+      .text-highlight {
+        font-size: 1em;
+        font-weight: bold;
+      }
+    }
+  }
 }
 
-// Mobile styles
 // .balance-list {
 //   .mat-list {
 //     padding-top: 4px;

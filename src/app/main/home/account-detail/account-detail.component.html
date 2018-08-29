@@ -1,39 +1,38 @@
 <o-form #form service="branches" entity="account" keys="ACCOUNTID" keys-sql-types="INTEGER" columns="ACCOUNTID;BALANCE;ENTITYID;OFFICEID;CDID;ANID;ACCOUNTTYP"
-  show-header="no" editable-detail="no" (onFormDataLoaded)="queryChart()">
+  show-header="no" editable-detail="no" (onFormDataLoaded)="queryChart()"></o-form>
 
-  <div fxLayout="column" class="account-info">
-    <span>AT {{ today | date:'shortDate' }} YOU HAVE IN YOUR</span>
-    <span class="account-name">{{ form.getDataValue('ACCOUNTTYP').value | uppercase }}</span>
-    <span class="total-balance">{{ form.getDataValue('BALANCE').value | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
-      }} €</span>
-  </div>
+<div fxLayout="column" class="account-info">
+  <span>At {{ today | date:'shortDate' }} you have in your</span>
+  <span class="account-name">{{ form.getDataValue('ACCOUNTTYP').value | uppercase }}</span>
+  <span class="total-balance">{{ form.getDataValue('BALANCE').value | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
+    }} €</span>
+</div>
 
-  <!-- parent-keys="ACCOUNTID" -->
-  <o-chart #chart type="line" x-label="Time" y-label="Amount (€)" service="movements" entity="movement" query-on-init="no"
-    x-axis="DATE_" y-axis="MOVEMENT" x-data-type="time" chart-height="200px" class="o-chart"></o-chart>
+<!-- parent-keys="ACCOUNTID" -->
+<o-chart #chart type="line" x-label="Time" y-label="Amount (€)" service="movements" entity="movement" query-on-init="no"
+  x-axis="DATE_" y-axis="MOVEMENT" x-data-type="time" chart-height="200px" class="o-chart"></o-chart>
 
-  <div fxLayout="row" fxLayoutAlign="center">
-    <button mat-icon-button (click)="onClickPrevMonth()">
-      <mat-icon>arrow_back_ios</mat-icon>
-    </button>
-    <p fxFlex style="text-align:center">{{ 'month-' + currentMonth | oTranslate }}</p>
-    <button mat-icon-button (click)="onClickNextMonth()">
-      <mat-icon>arrow_forward_ios</mat-icon>
-    </button>
-  </div>
+<div fxLayout="row" fxLayoutAlign="center center" class="month-selector">
+  <button mat-icon-button (click)="onClickPrevMonth()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <p fxFlex style="text-align:center">{{ 'month-' + currentMonth | oTranslate }}</p>
+  <button mat-icon-button (click)="onClickNextMonth()">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</div>
 
-  <o-list #list attr="movementsList" service="movements" entity="movement" keys="MOVEMENTID" parent-keys="ACCOUNTID" columns="ACCOUNTID;MOVEMENTID;DATE_;CONCEPT;MOVEMENT;MOVEMENTTYPEID"
-    query-on-init="no" query-on-bind="no" pageable="no" controls="no" dense="yes" detail-mode="none" class="movements-list">
-    <mat-list-item *ngFor="let rowData of list.dataArray" [o-list-item]="rowData">
-      <mat-icon *ngIf="rowData.MOVEMENTTYPEID===1 || rowData.MOVEMENTTYPEID===5" mat-list-icon>account_balance</mat-icon>
-      <mat-icon *ngIf="rowData.MOVEMENTTYPEID===2" mat-list-icon>account_balance_wallet</mat-icon>
-      <mat-icon *ngIf="rowData.MOVEMENTTYPEID===3" mat-list-icon>attach_money</mat-icon>
-      <span mat-line>
-        <span fxFlex>{{ rowData.CONCEPT }}</span>
-        <span>{{ rowData.MOVEMENT }} €</span>
-      </span>
-      <span mat-line>{{ rowData.DATE_ | date }}</span>
-    </mat-list-item>
-  </o-list>
-
-</o-form>
+<!-- parent-keys="ACCOUNTID" -->
+<o-list #list attr="movementsList" service="movements" entity="movement" keys="MOVEMENTID" columns="ACCOUNTID;MOVEMENTID;DATE_;CONCEPT;MOVEMENT;MOVEMENTTYPEID"
+  query-on-init="no" query-on-bind="no" pageable="no" controls="no" dense="yes" detail-mode="none" class="movements-list">
+  <mat-list-item *ngFor="let rowData of list.dataArray" [o-list-item]="rowData">
+    <mat-icon *ngIf="rowData.MOVEMENTTYPEID===1 || rowData.MOVEMENTTYPEID===5" mat-list-icon>account_balance</mat-icon>
+    <mat-icon *ngIf="rowData.MOVEMENTTYPEID===2" mat-list-icon>account_balance_wallet</mat-icon>
+    <mat-icon *ngIf="rowData.MOVEMENTTYPEID===3" mat-list-icon>attach_money</mat-icon>
+    <span mat-line>
+      <span class="text-primary" fxFlex>{{ rowData.CONCEPT }}</span>
+      <span class="text-highlight">{{ rowData.MOVEMENT }} €</span>
+    </span>
+    <span mat-line>{{ rowData.DATE_ | date }}</span>
+  </mat-list-item>
+</o-list>
