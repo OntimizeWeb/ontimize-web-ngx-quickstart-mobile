@@ -1,11 +1,16 @@
 <o-form #form service="branches" entity="account" keys="ACCOUNTID" keys-sql-types="INTEGER" columns="ACCOUNTID;BALANCE;ENTITYID;OFFICEID;CDID;ANID;ACCOUNTTYP"
   show-header="no" editable-detail="no" (onFormDataLoaded)="queryChart()"></o-form>
 
-<div fxLayout="column" class="account-info">
-  <span>At {{ today | date:'shortDate' }} you have in your</span>
-  <span class="account-name">{{ form.getDataValue('ACCOUNTTYP').value | uppercase }}</span>
-  <span class="total-balance">{{ form.getDataValue('BALANCE').value | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
-    }} €</span>
+<div fxLayout="row" fxLayoutAlign="center center" class="account-info">
+  <button mat-icon-button (click)="location.back()" fxFlex="10">
+    <mat-icon svgIcon="ontimize:arrow_back"></mat-icon>
+  </button>
+  <div fxLayout="column" fxFlex="90">
+    <span class="raw-text">At {{ today | date:'shortDate' }} you have in your</span>
+    <span class="account-name">{{ form.getDataValue('ACCOUNTTYP').value | uppercase }}</span>
+    <span class="total-balance">{{ form.getDataValue('BALANCE').value | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
+      }} €</span>
+  </div>
 </div>
 
 <!-- parent-keys="ACCOUNTID" -->
@@ -13,13 +18,9 @@
   x-axis="DATE_" y-axis="MOVEMENT" x-data-type="time" chart-height="200px" class="o-chart"></o-chart>
 
 <div fxLayout="row" fxLayoutAlign="center center" class="month-selector">
-  <button mat-icon-button (click)="onClickPrevMonth()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <p fxFlex style="text-align:center">{{ 'month-' + currentMonth | oTranslate }}</p>
-  <button mat-icon-button (click)="onClickNextMonth()">
-    <mat-icon>arrow_forward</mat-icon>
-  </button>
+  <button (click)="onClickPrevMonth()">{{ 'month-' + (currentMonth - 1) | oTranslate }}</button>
+  <p fxFlex class="current-month">{{ 'month-' + currentMonth | oTranslate }}</p>
+  <button (click)="onClickNextMonth()">{{ 'month-' + (currentMonth + 1) | oTranslate }}</button>
 </div>
 
 <!-- parent-keys="ACCOUNTID" -->
@@ -31,8 +32,10 @@
     <mat-icon *ngIf="rowData.MOVEMENTTYPEID===3" mat-list-icon>attach_money</mat-icon>
     <span mat-line>
       <span class="text-primary" fxFlex>{{ rowData.CONCEPT }}</span>
-      <span class="text-highlight">{{ rowData.MOVEMENT }} €</span>
+      <span class="text-highlight" [class.amount-green]="rowData.MOVEMENT >= 0" [class.amount-red]="rowData.MOVEMENT < 0">{{
+        rowData.MOVEMENT }} €</span>
     </span>
     <span mat-line>{{ rowData.DATE_ | date }}</span>
+    <mat-divider></mat-divider>
   </mat-list-item>
 </o-list>

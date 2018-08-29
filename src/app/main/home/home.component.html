@@ -1,6 +1,6 @@
 <div fxLayout="column" class="user-info">
-  <span>Hello {{ username | uppercase }},</span>
-  <span>You have</span>
+  <span class="raw-text">Hello <span class="username-text">{{ username | uppercase }}</span>,</span>
+  <span class="raw-text">You have</span>
   <span class="balance">{{ calculateUserBalance(accountsList.dataArray) | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
     }} €</span>
 </div>
@@ -12,5 +12,6 @@
     <span mat-line class="text-primary">{{ row.ACCOUNTTYP }}</span>
     <span mat-line>{{ row.ACCOUNT }}</span>
     <span mat-line class="text-highlight">{{ row.BALANCE }} €</span>
+    <mat-divider></mat-divider>
   </mat-list-item>
 </o-list>

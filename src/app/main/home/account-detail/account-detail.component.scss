@@ -1,19 +1,31 @@
+@import 'src/assets/css/colors.scss';
+
 .o-form .o-form-content-wrapper {
   padding: 0;
 }
 
 .account-info {
-  font-size: .8em;
-  height: 66px;
+  height: 77px;
+  background: $blue-background;
+  color: $text-color;
+  padding: 6px;
+
+  .raw-text {
+    font-size: 12px;
+  }
 
   .account-name {
-    font-size: 1.4em;
+    font-size: 18px;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .total-balance {
-    font-size: 2em;
+    font-size: 28px;
     font-weight: bold;
+    text-align: right;
   }
 }
 
@@ -23,12 +35,27 @@ o-chart.o-chart div:first-child {
 
 .month-selector {
   height: 40px;
-  border-radius: 8px;
-  background: #cccccc;
+  background: $blue-background;
+
+  button {
+    border: none;
+    padding: 0 12px;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: $text-color;
+  }
+
+  .current-month {
+    color: $text-color;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
 }
 
 .movements-list {
-  height: calc(100% - 66px - 200px - 40px);
+  height: calc(100% - 77px - 200px - 40px);
 
   .mat-list {
     mat-list-item.mat-list-item.mat-2-line {
@@ -38,14 +65,30 @@ o-chart.o-chart div:first-child {
     mat-list-item.o-list-item.mat-list-item {
       margin: 0;
 
+      .mat-list-icon {
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        font-size: 36px;
+        color: $icon-color;
+      }
+
       .text-primary {
-        font-size: 1.4em;
+        font-size: 18px;
         font-weight: bold;
       }
 
       .text-highlight {
-        font-size: 1.5em;
+        font-size: 18px;
         font-weight: bold;
+
+        &.amount-green {
+          color: #5bae7a;
+        }
+
+        &.amount-red {
+          color: #b76675;
+        }
       }
     }
   }

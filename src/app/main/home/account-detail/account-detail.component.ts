@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Location } from '@angular/common';
 import { OChartComponent } from 'ontimize-web-ngx-charts';
 import { FilterExpressionUtils, OFormComponent, OListComponent } from 'ontimize-web-ngx';
 
@@ -20,8 +21,17 @@ export class AccountDetailComponent implements AfterViewInit {
   date = new Date(2000, 5);
   currentMonth: number = + new Date(2000, 5).getMonth();
 
+  constructor(
+    public location: Location
+  ) { }
+
   ngAfterViewInit(): void {
     this.chart.options.chart['showLegend'] = false;
+    this.chart.options.chart.xAxis.axisLabel = '';
+    this.chart.options.chart['color'] = ['#42a5f5'];
+    this.chart.options.chart.lines = { isArea: true }
+    // this.chart.options.chart['showYAxisLabel'] = false;
+    // this.chart.options.chart['showXAxisLabel'] = false;
   }
 
   queryChart(): void {

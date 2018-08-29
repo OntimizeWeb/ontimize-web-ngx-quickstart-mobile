@@ -1,16 +1,29 @@
+@import 'src/assets/css/colors.scss';
+
 .user-info {
-  font-size: 1.5em;
-  padding-left: 1em;
-  height: 60px;
+  padding: 6px 6px 6px 24px;
+  height: 82px;
+  background: $blue-background;
+  color: $text-color;
+
+  .raw-text {
+    font-size: 16px;
+  }
+
+  .username-text {
+    font-weight: bold;
+    font-size: 20px;
+  }
 
   .balance {
-    font-size: 1em;
+    font-size: 24px;
     font-weight: bold;
+    text-align: right;
   }
 }
 
 .balance-list {
-  height: calc(100% - 60px);
+  height: calc(100% - 82px);
 
   .mat-list {
     mat-list-item.mat-list-item.mat-3-line {
@@ -20,37 +33,24 @@
     mat-list-item.o-list-item.mat-list-item {
       margin: 0;
 
+      .mat-list-icon {
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        font-size: 36px;
+        color: $icon-color;
+      }
+
       .text-primary {
-        font-size: 1.1em;
+        font-size: 18px;
         font-weight: bold;
       }
 
       .text-highlight {
-        font-size: 1em;
+        font-size: 18px;
         font-weight: bold;
+        text-align: right;
       }
     }
   }
 }
-
-// .balance-list {
-//   .mat-list {
-//     padding-top: 4px;
-
-//     .o-list-item.mat-list-item {
-//       margin: 3px 0;
-//     }
-
-//     .mat-list-item.mat-3-line {
-//       height: 60px;
-//     }
-
-//     .mat-list-item .mat-list-item-content {
-//       padding: 0 8px;
-//     }
-
-//     .mat-list-item .mat-list-item-content .mat-list-text:not(:nth-child(2)) {
-//       padding-left: 8px;
-//     }
-//   }
-// }
