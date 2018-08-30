@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { OUserInfoService } from 'ontimize-web-ngx';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'home',
@@ -10,20 +9,7 @@ import { OUserInfoService } from 'ontimize-web-ngx';
   },
   encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent implements OnInit {
-
-  public username: string;
-
-  constructor(
-    private userService: OUserInfoService
-  ) { }
-
-  ngOnInit() {
-    let userInfo = this.userService.getUserInfo();
-    if (userInfo) {
-      this.username = userInfo.username;
-    }
-  }
+export class HomeComponent {
 
   calculateUserBalance(data: any[]): number {
     return data.map(a => a.BALANCE).reduce((a, b) => a + b, 0);

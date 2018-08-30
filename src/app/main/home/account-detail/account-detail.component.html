@@ -1,26 +1,25 @@
 <o-form #form service="branches" entity="account" keys="ACCOUNTID" keys-sql-types="INTEGER" columns="ACCOUNTID;BALANCE;ENTITYID;OFFICEID;CDID;ANID;ACCOUNTTYP"
-  show-header="no" editable-detail="no" (onFormDataLoaded)="queryChart()"></o-form>
+  show-header="no" editable-detail="no" (onFormDataLoaded)="queryData()"></o-form>
 
 <div fxLayout="row" fxLayoutAlign="center center" class="account-info">
   <button mat-icon-button (click)="location.back()" fxFlex="10">
     <mat-icon svgIcon="ontimize:arrow_back"></mat-icon>
   </button>
   <div fxLayout="column" fxFlex="90">
-    <span class="raw-text">At {{ today | date:'shortDate' }} you have in your</span>
+    <span class="raw-text">{{ 'AT' | oTranslate }} {{ today | date:'shortDate' }} {{ 'YOU_HAVE_IN_YOUR' | oTranslate }}</span>
     <span class="account-name">{{ form.getDataValue('ACCOUNTTYP').value | uppercase }}</span>
     <span class="total-balance">{{ form.getDataValue('BALANCE').value | oReal: {grouping:true, minDecimalDigits:2, maxDecimalDigits:2}
       }} €</span>
   </div>
 </div>
 
-<!-- parent-keys="ACCOUNTID" -->
-<o-chart #chart type="line" x-label="Time" y-label="Amount (€)" service="movements" entity="movement" query-on-init="no"
-  x-axis="DATE_" y-axis="MOVEMENT" x-data-type="time" chart-height="200px" class="o-chart"></o-chart>
+<o-chart #chart type="line" x-label="Time" y-label="Amount (€)" query-on-init="no" x-axis="DATE" y-axis="BALANCE" x-data-type="time"
+  chart-height="200px" class="o-chart"></o-chart>
 
 <div fxLayout="row" fxLayoutAlign="center center" class="month-selector">
-  <button (click)="onClickPrevMonth()">{{ 'month-' + (currentMonth - 1) | oTranslate }}</button>
+  <button (click)="onClickPrevMonth()">{{ 'month-' + getPrevMonth(currentMonth) | oTranslate }}</button>
   <p fxFlex class="current-month">{{ 'month-' + currentMonth | oTranslate }}</p>
-  <button (click)="onClickNextMonth()">{{ 'month-' + (currentMonth + 1) | oTranslate }}</button>
+  <button (click)="onClickNextMonth()">{{ 'month-' + getNextMonth(currentMonth) | oTranslate }}</button>
 </div>
 
 <!-- parent-keys="ACCOUNTID" -->
@@ -33,7 +32,7 @@
     <span mat-line>
       <span class="text-primary" fxFlex>{{ rowData.CONCEPT }}</span>
       <span class="text-highlight" [class.amount-green]="rowData.MOVEMENT >= 0" [class.amount-red]="rowData.MOVEMENT < 0">{{
-        rowData.MOVEMENT }} €</span>
+        rowData.MOVEMENT | number: '.2' }} €</span>
     </span>
     <span mat-line>{{ rowData.DATE_ | date }}</span>
     <mat-divider></mat-divider>
