@@ -7,7 +7,7 @@
   $foreground: map-get($theme, foreground);
 
   .login-outer-container {
-    background-color: mat-color($background, background);
+    background-color: white;
 
     .login-inner-container {
       background-color: mat-color($background, dialog);
