@@ -42,7 +42,6 @@ export class AccountDetailComponent implements AfterViewInit {
   }
 
   queryData(): void {
-    this.chart.data = [];
     let feKey = FilterExpressionUtils.buildExpressionFromObject(this.form.getKeysValues());
     let fe1 = FilterExpressionUtils.buildExpressionMoreEqual('DATE_', new Date(this.date.getFullYear(), this.date.getMonth(), 1).getTime());
     let fe2 = FilterExpressionUtils.buildExpressionLess('DATE_', new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getTime());
@@ -66,13 +65,19 @@ export class AccountDetailComponent implements AfterViewInit {
             let adapter: ChartDataAdapter = factory.getAdapter('line');
             let adaptedResult = adapter.adaptResult(balanceProgress);
             self.chart.data = adaptedResult;
+          } else {
+            self.chart.data = [];
           }
         }, err => {
           console.log(err);
+          self.chart.data = [];
         });
+      } else {
+        self.chart.data = [];
       }
     }, err => {
       console.log(err);
+      self.chart.data = [];
     });
 
     let beList = FilterExpressionUtils.buildBasicExpression(FilterExpressionUtils.buildComplexExpression(feKey, beDates, FilterExpressionUtils.OP_AND));
