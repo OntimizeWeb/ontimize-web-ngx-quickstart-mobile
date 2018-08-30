@@ -6,8 +6,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4204",
-    "production": "ng build --aot=false --target -prod",
-    "production-aot": "ontimize-web-ngx production-aot --href /ontimize-web-ngx-quickstart-mobile/"
+    "production": "ng build --aot=false --target -prod --base-href /ontimize-web-ngx-quickstart-mobile/",
+    "production-aot": "ontimize-web-ngx production-aot --href /ontimize-web-ngx-quickstart-mobile/",
+    "production-aot-server": "ontimize-web-ngx production-aot --href /ontimizeweb/quickstartmobile/"
   },
   "private": true,
   "dependencies": {
