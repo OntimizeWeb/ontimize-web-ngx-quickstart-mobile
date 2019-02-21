@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4204",
+    "start": "ng serve --port 4309",
     "production": "ng build --aot=false --target -prod --base-href /ontimize-web-ngx-quickstart-mobile/",
     "production-aot": "ontimize-web-ngx production-aot --href /ontimize-web-ngx-quickstart-mobile/",
     "production-aot-server": "ontimize-web-ngx production-aot --href /ontimizeweb/v3/quickstartmobile/"
